@@ -1,20 +1,20 @@
 import axios from 'axios';
-import { Message } from 'element-ui';
-
 
 let baseURL = '';
-if (process.env.NODE_ENV === 'development') {
-  baseURL = 'http://47.100.47.138:8033';  //设置自己的baseURL
-}
+// if (process.env.NODE_ENV === 'development') {
+//   baseURL = '/proxy';
+// }
 
 const service = axios.create({
   baseURL
+  // timeout: 240000  // request timeout455445424
 });
 
 // request interceptor
 service.interceptors.request.use(config => {
   config.headers = {
-    'Content-Type': 'application/json;charset=utf-8'
+    'Content-Type': 'application/json;charset=utf-8',
+    'authToken':localStorage.getItem('authToken')
   };
   return config;
 }, error => {
@@ -40,54 +40,43 @@ const codeMessage = {
   504: '网关超时。'
 };
 /**
- * @function 请求状态码检测
- * @param  {type} response {description}
- * @return {type} {description}
+ * 请求状态码检测
+ * @function checkStatus
+ * @param  {object} response 请求返回体
+ * @return {object} 请求返回体
  */
 const checkStatus = response => {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
   const errortext = codeMessage[response.status] || response.statusText;
-  Message({
-    message: `请求错误 ${response.status}: ${response.url},${errortext}`,
-    type: 'error',
-    duration: 5 * 1000
-  });
+  // Message({
+  //   message: `请求错误 ${response.status}: ${response.url},${errortext}`,
+  //   type: 'error',
+  //   duration: 5 * 1000
+  // });
   const error = new Error(errortext);
   error.name = response.status;
   error.response = response;
   throw error;
 };
-/* 返回一个Promise(发送post请求) */
- const fetch = (type, url, params) => {
 
+/**
+ * axios发送请求函数
+ * @function fetch
+ * @param  {string} type 请求类型
+ * @param  {string} url 请求url
+ * @param  {object} params 请求data数据
+ * @return {object} 请求返回体（promise）
+ */
+ const fetch = (type, url, params) => {
   return new Promise((resolve, reject) => {
-    const data = (type === 'get' || type === 'delete') ? { params: params } : params;
+    debugger
+    const data = params;
     service[type](url, data)
       .then(checkStatus)
       .then(response => {
-        const resultData = response.data;
-        const code = resultData.code || resultData.R;
-        if (code === 200 || code === 220 || code === 299) {
-          resolve(resultData);
-        } else if (code === 1) {
-          Message({
-            message: resultData.message || resultData.msg,
-            type: 'error',
-            duration: 5 * 1000
-          });
-          reject(new Error(resultData.message));
-        } else {
-          if (resultData.message !== '异常') {
-            Message({
-              message: resultData.message || resultData.msg,
-              type: 'error',
-              duration: 5 * 1000
-            });
-          }
-          reject(new Error(resultData.message));
-        }
+          resolve(response.data);
       }).catch((error) => {
         reject(error);
       });

@@ -3,12 +3,7 @@
     <el-container>
       <el-header></el-header>
       <el-main class="login_form">
-        <el-form
-          :model="formLoginIn"
-          ref="formLoginIn"
-          label-width="100px"
-          class="demo-ruleForm"
-        >
+        <el-form :model="formLoginIn" ref="formLoginIn" label-width="100px" class="demo-ruleForm">
           <el-form-item label="用户名" prop="username">
             <el-input v-model="formLoginIn.username"></el-input>
           </el-form-item>
@@ -26,6 +21,8 @@
   </div>
 </template>
 <script>
+import { Login } from "@/api/api.js";
+
 export default {
   name: "login",
   data() {
@@ -41,7 +38,17 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          alert("submit!");
+          const loginInfo = {
+            username: this.formLoginIn.username,
+            password: this.formLoginIn.password
+          };
+          Login.userLogin(loginInfo)
+            .then(res => {
+              localStorage.setItem('authToken',res.data.authToken)
+            })
+            .catch(err => {
+              alert(err);
+            });
         } else {
           console.log("error submit!!");
           return false;
@@ -49,6 +56,9 @@ export default {
       });
     },
     resetForm(formName) {
+      Login.jcnb('1040861467@qq.com').then(res=>{
+        console.log(res)
+      })
       this.$refs[formName].resetFields();
     }
   }
