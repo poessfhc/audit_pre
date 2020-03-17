@@ -7,5 +7,8 @@ export const Login = {
     jcnb(data){
       // return fetch('get','/admin/sendCodeEmail','emailAddress='+data)
       return fetch('get','/admin/sendCodeEmail',{'emailAddress': data})
+    },
+    queryMenuList(data){
+      return fetch("get","/admin/queryControlTypeList",{})
     }
   }
