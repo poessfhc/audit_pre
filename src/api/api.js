@@ -5,6 +5,7 @@ export const Login = {
       return fetch('post','/user/login',data)
     },
     jcnb(data){
-      return fetch('get','/admin/sendCodeEmail','emailAddress='+data)
+      // return fetch('get','/admin/sendCodeEmail','emailAddress='+data)
+      return fetch('get','/admin/sendCodeEmail',{'emailAddress': data})
     }
   }

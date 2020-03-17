@@ -14,7 +14,7 @@ const service = axios.create({
 service.interceptors.request.use(config => {
   config.headers = {
     'Content-Type': 'application/json;charset=utf-8',
-    'authToken':localStorage.getItem('authToken')
+    'authToken': localStorage.getItem('authToken')
   };
   return config;
 }, error => {
@@ -69,14 +69,13 @@ const checkStatus = response => {
  * @param  {object} params 请求data数据
  * @return {object} 请求返回体（promise）
  */
- const fetch = (type, url, params) => {
+const fetch = (type, url, params) => {
   return new Promise((resolve, reject) => {
-    debugger
-    const data = params;
+    const data = (type == 'get' || type == 'delete') ? { params: params } : params;
     service[type](url, data)
       .then(checkStatus)
       .then(response => {
-          resolve(response.data);
+        resolve(response.data);
       }).catch((error) => {
         reject(error);
       });

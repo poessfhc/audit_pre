@@ -56,7 +56,7 @@ export default {
       });
     },
     resetForm(formName) {
-      Login.jcnb('1040861467@qq.com').then(res=>{
+      Login.jcnb('1024065905@qq.com').then(res=>{
         console.log(res)
       })
       this.$refs[formName].resetFields();
