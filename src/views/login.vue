@@ -45,7 +45,7 @@ export default {
           Login.userLogin(loginInfo)
             .then(res => {
               localStorage.setItem("authToken", res.data.authToken);
-              this.$router.push("/test");
+              this.$router.push("/menu");
             })
             .catch(err => {
               alert(err);

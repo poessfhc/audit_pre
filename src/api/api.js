@@ -12,3 +12,9 @@ export const Login = {
       return fetch("get","/admin/queryControlTypeList",{})
     }
   }
+
+export const Business = {
+  projectList(data){
+    return fetch("get","/test/fingTest",data)
+  }
+}

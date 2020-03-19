@@ -1,5 +1,5 @@
 <template>
-  <el-tree :data="data" :props="defaultProps" accordion @node-click="handleNodeClick"></el-tree>
+  <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
 </template>
 
 <script>
@@ -21,11 +21,10 @@ export default {
   methods: {
     async init() {
       const data = await Login.queryMenuList();
-      console.log(data.data.data)
       this.data = data.data.data;
     },
     handleNodeClick(data) {
-      console.log(data);
+      console.log(data.menuName);
     }
   }
 };

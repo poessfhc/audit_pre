@@ -19,9 +19,9 @@ const routes = [
     component:() => import('@/views/Main.vue')
   },
   {
-    path: '/test',
-    name: 'test',
-    component:() => import('@/components/menutree.vue')
+    path: '/projectForm',
+    name: 'projectForm',
+    component:() => import('@/components/form/ProjectForm.vue')
   }
 ]
 
