@@ -22,7 +22,7 @@
 </template>
 <script>
 import { Login } from "@/api/api.js";
-
+import {mapActions} from 'vuex'
 export default {
   name: "login",
   data() {
@@ -35,6 +35,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions({ add_Routes: "add_Routes" }),
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -44,8 +45,23 @@ export default {
           };
           Login.userLogin(loginInfo)
             .then(res => {
-              localStorage.setItem("authToken", res.data.authToken);
-              this.$router.push("/menu");
+              if (res.status == 200) {
+                localStorage.setItem("authToken", res.data.authToken);
+                //将路由信息，菜单信息，用户信息存到sessionStorage里
+                sessionStorage.setItem(
+                  "menuData",
+                  JSON.stringify(res.data.navData)
+                );
+                sessionStorage.setItem("user", res.data.username);
+                sessionStorage.setItem(
+                  "routes",
+                  JSON.stringify(res.data.routerData)
+                );
+                console.log(res.data.routerData)
+                this.add_Routes(res.data.routerData) //触发vuex里的增加路由
+                console.log(this.$router)
+                this.$router.push('menu1_item1')
+              }
             })
             .catch(err => {
               alert(err);
