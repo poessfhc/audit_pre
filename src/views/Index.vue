@@ -37,29 +37,5 @@
 </style>
 
 <script>
-export default {
-  name: "v-sidebar",
-  data() {
-    return {
-      isClicked: false,
-      iconData: { metas: "" },
-      systems: "",
-      items: "",
-      value: "",
-      input2: "",
-      navData: "",
-      currentNavItems: [],
-      isHover: false
-    };
-  },
-  methods: {
-    sliderHover() {
-      this.isClicked = false;
-    }
-  },
-  created() {
-    // 从sessionStorage得到menuData
-    this.currentNavItems = JSON.parse(sessionStorage.getItem("menuData"));
-  }
-};
+export default {};
 </script>

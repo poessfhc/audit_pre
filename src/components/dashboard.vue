@@ -1,17 +1,27 @@
 <template>
-  <div class="main">
-    <navbar></navbar>
-    <sidebar></sidebar>
-    <router-view></router-view>
+  <div>
+    <el-container style="height:860px ; border: 1 px solid #eee">
+      <el-header>
+        <navbar></navbar>
+      </el-header>
+      <el-container>
+        <el-aside width="200px">
+          <sidebar></sidebar>
+        </el-aside>
+        <el-main>
+          <router-view />
+        </el-main>
+      </el-container>
+    </el-container>
   </div>
 </template>
 
 <script>
-import Sidebar from "./sidebar";
-import Navbar from "./Navbar";
+import Navbar from "@/components/Navbar";
+import Sidebar from "@/components/sidebar";
 export default {
   name: "dashboard",
-  components: { Sidebar, Navbar },
+  components: { Navbar, Sidebar },
   data() {
     return {
       user: ""
@@ -21,4 +31,11 @@ export default {
 </script>
 
 <style scoped>
+.main .el-header {
+  height: 131 px !important;
+  background-color: white;
+  color: #333;
+  overflow: hidden;
+  border-bottom: 1px #eee solid;
+}
 </style>
