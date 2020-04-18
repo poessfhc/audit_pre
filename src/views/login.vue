@@ -57,10 +57,11 @@ export default {
                   "routes",
                   JSON.stringify(res.data.routerData)
                 );
+                localStorage.setItem("authToken", res.data.authToken);
                 console.log(res.data.routerData)
                 this.add_Routes(res.data.routerData) //触发vuex里的增加路由
                 console.log(this.$router)
-                this.$router.push('menu1_item1')
+                this.$router.push('menu2_item2')
               }
             })
             .catch(err => {

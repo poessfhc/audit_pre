@@ -13,8 +13,20 @@ export const Login = {
     }
   }
 
+export const User = {
+  queryUserList(data){
+    return fetch("get","/admin/queryUser",data)
+  }
+}
+
 export const Business = {
   projectList(data){
-    return fetch("get","/test/fingTest",data)
+    return fetch("get","/implement/queryProjectListByStatus",data)
+  }
+}
+
+export const Log = {
+  queryLogList(data){
+    return fetch("get","/log/querySysLog",data)
   }
 }
