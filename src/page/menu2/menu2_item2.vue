@@ -1,22 +1,11 @@
 <template>
   <div class="deit">
     <div class="crumbs">
-      <el-select
-        class="select_list"
-        v-model="value"
-        filterable
-        placeholder="请选择"
-        @change="clickEvent()"
-      >
-        <el-option
-          v-for="item in stageList"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        ></el-option>
-      </el-select>
       <div class="cantainer">
-        <el-table style="width: auto;" :data="projectList">
+        <el-table
+          :data="projectList.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+          style="width: 100%"
+        >
           <el-table-column label="序号" type="index" width="50"></el-table-column>
           <el-table-column label="系统名字" prop="projectName" width="120"></el-table-column>
           <el-table-column label="创建时间" prop="createTime" width="180"></el-table-column>
@@ -24,6 +13,32 @@
           <el-table-column label="工程实施用户" prop="username" width="150"></el-table-column>
           <el-table-column label="工程描述" prop="description" width="200"></el-table-column>
           <el-table-column label="工程阶段" prop="stage" width="200"></el-table-column>
+          <el-table-column align="right">
+            <template slot="header" slot-scope="scope">
+              <el-select
+                class="select_list"
+                v-model="value"
+                filterable
+                placeholder="请选择"
+                @change="clickEvent()"
+              >
+                <el-option
+                  v-for="item in stageList"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                ></el-option>
+              </el-select>
+            </template>
+            <template slot-scope="scope">
+              <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">审核</el-button>
+              <el-button
+                size="mini"
+                type="danger"
+                @click="handleDelete(scope.$index, scope.row)"
+              >Delete</el-button>
+            </template>
+          </el-table-column>
         </el-table>
         <el-pagination
           class="pagination"
