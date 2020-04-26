@@ -94,7 +94,7 @@ export default {
       var stage;
       for (var i = 0; i < this.projectList.length; i++) {
         stage = this.projectList[i].stage;
-        this.projectList[i].stage = this.stageList[stage - 1].label;
+        this.projectList[i].stage = this.stageList[stage].label;
       }
     },
     // 初始页currentPage、初始每页数据数pagesize和数据data
@@ -110,7 +110,7 @@ export default {
         var stage;
         for (var i = 0; i < this.projectList.length; i++) {
           stage = this.projectList[i].stage;
-          this.projectList[i].stage = this.stageList[stage - 1].label;
+          this.projectList[i].stage = this.stageList[stage].label;
         }
       });
     },
@@ -126,7 +126,7 @@ export default {
         var stage;
         for (var i = 0; i < this.projectList.length; i++) {
           stage = this.projectList[i].stage;
-          this.projectList[i].stage = this.stageList[stage - 1].label;
+          this.projectList[i].stage = this.stageList[stage].label;
         }
       });
     },
@@ -141,9 +141,34 @@ export default {
         var stage;
         for (var i = 0; i < this.projectList.length; i++) {
           stage = this.projectList[i].stage;
-          this.projectList[i].stage = this.stageList[stage - 1].label;
+          this.projectList[i].stage = this.stageList[stage].label;
         }
       });
+    },
+    handleEdit(index, row) {
+      if (row.stage == "立项") {
+        this.$prompt("请输入邮箱", "立项", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
+          inputErrorMessage: "邮箱格式不正确"
+        })
+          .then(({ value }) => {
+            this.$message({
+              type: "success",
+              message: "你的邮箱是: " + value
+            });
+          })
+          .catch(() => {
+            this.$message({
+              type: "info",
+              message: "取消输入"
+            });
+          });
+      }
+    },
+    handleDelete(index, row) {
+      console.log(index, row);
     }
   }
 };

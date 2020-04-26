@@ -20,6 +20,10 @@ export const User = {
 }
 
 export const Business = {
+  insertProject(data){
+    return fetch("post","/implement/insertProject",data)
+  },
+
   projectList(data){
     return fetch("get","/implement/queryProjectListByStatus",data)
   }
