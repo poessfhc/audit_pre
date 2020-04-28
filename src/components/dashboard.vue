@@ -1,13 +1,13 @@
 <template>
   <div>
     <el-container style="height:860px ; border: 1 px solid #eee">
-      <el-header>
-        <navbar></navbar>
-      </el-header>
+      <el-aside width="200px">
+        <sidebar></sidebar>
+      </el-aside>
       <el-container>
-        <el-aside width="200px">
-          <sidebar></sidebar>
-        </el-aside>
+        <el-header>
+          <navbar></navbar>
+        </el-header>
         <el-main>
           <router-view />
         </el-main>

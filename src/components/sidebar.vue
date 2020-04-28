@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <el-container style="height: 500px; border: 1px solid #eee">
-      <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+    <el-container style="height: 800px; border: 1px solid #eee">
+      <el-aside width="199px" style="background-color: rgb(255, 255, 255)">
         <el-menu router :default-active="$route.path" unique-opened>
           <el-submenu v-for="(child, index) in currentNavItems" :key="index" :index="index+''">
             <template slot="title">
@@ -14,12 +14,6 @@
           </el-submenu>
         </el-menu>
       </el-aside>
-
-      <el-container>
-        <el-main>
-          <router-view></router-view>
-        </el-main>
-      </el-container>
     </el-container>
   </div>
 </template>

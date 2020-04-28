@@ -26,6 +26,14 @@ export const Business = {
 
   projectList(data){
     return fetch("get","/implement/queryProjectListByStatus",data)
+  },
+
+  auditProjectList(data){
+    return fetch("get","/implement/queryAuditProjectListByStatus",data)
+  },
+
+  queryProjectById(data){
+    return fetch("get","/implement/queryProjectById",data)
   }
 }
 

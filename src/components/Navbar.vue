@@ -40,19 +40,6 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-.navbar {
-  position: fixed;
-  height: 61px;
-  width: 100%;
-  background-color: #545c64;
-  .user {
-    width: 8%;
-    float: right;
-    margin-right: 25px;
-    margin-top: 20px;
-    font-weight: bold;
-  }
-}
 .el-dropdown {
   vertical-align: top;
   color: aqua;
