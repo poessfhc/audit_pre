@@ -69,6 +69,7 @@
 import { Business } from "@/api/api.js";
 import componentDialog from "@/components/dialog/projectAuditDialog";
 export default {
+  inject:['reload'],
   components: {
     componentDialog
   },
@@ -196,6 +197,7 @@ export default {
         };
         Business.queryProjectById({ id: row.id }).then(res => {
           this.dialogInfo = {
+            id: res.data.project.id,
             projectName: res.data.project.projectName,
             stage: stageList[res.data.project.stage],
             description: res.data.project.description,

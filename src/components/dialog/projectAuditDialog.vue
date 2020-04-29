@@ -19,12 +19,13 @@
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="cancelDialog">取 消</el-button>
-      <el-button type="primary" @click="cancelDialog">确 定</el-button>
+      <el-button type="primary" @click="cancelDialog">通 过</el-button>
     </div>
   </el-dialog>
 </template>
 
 <script>
+import { Business } from "@/api/api.js";
 export default {
   //父组件 传 过来的 值
   props: {
@@ -48,14 +49,18 @@ export default {
   components: {},
   name: "projectAuditDialog",
   data() {
-    return {};
+    return {
+      dialogInfo: ""
+    };
   },
   created() {},
   mounted() {},
   methods: {
     //修改父组件传过来的值
     cancelDialog() {
+      Business.changeProjectStageById({id: this.dialogInfo.id})
       this.$emit("update:dialogVisible", false);
+      this.$parent.reload()
     }
   }
 };
