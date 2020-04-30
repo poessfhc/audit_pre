@@ -3,10 +3,12 @@ import App from './App.vue'
 import router from './router'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import elTableInfiniteScroll from 'el-table-infinite-scroll';
 import store from "./store/store"
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
+Vue.use(elTableInfiniteScroll)
 
 // 用户手动刷新页面，这是路由会被重设，要重新新增
 if (sessionStorage.getItem('user')) {

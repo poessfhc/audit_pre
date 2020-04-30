@@ -19,7 +19,7 @@
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="cancelDialog">取 消</el-button>
-      <el-button type="primary" @click="cancelDialog">通 过</el-button>
+      <el-button type="primary" @click="success">通 过</el-button>
     </div>
   </el-dialog>
 </template>
@@ -57,10 +57,13 @@ export default {
   mounted() {},
   methods: {
     //修改父组件传过来的值
-    cancelDialog() {
+    success() {
       Business.changeProjectStageById({id: this.dialogInfo.id})
       this.$emit("update:dialogVisible", false);
       this.$parent.reload()
+    },
+    cancelDialog(){
+      this.$emit("update:dialogVisible", false);
     }
   }
 };
