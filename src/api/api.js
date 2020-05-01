@@ -38,14 +38,17 @@ export const Business = {
   changeProjectStageById(data) {
     return fetch("get", "/implement/changeProjectStageById", data)
   },
-  queryInstallationList(data){
+  queryInstallationList(data) {
     return fetch("get", "/project/queryInstallationList", data)
   },
-  insertInstallation(data){
+  insertInstallation(data) {
     return fetch("post", "/project/insertInstallation", data)
   },
-  queryInstallationCountById(data){
+  queryInstallationCountById(data) {
     return fetch("get", "/project/queryInstallationCountById", data)
+  },
+  queryProjectAuditByProjectId(data) {
+    return fetch("get", "/project/queryProjectAuditByProjectId", data)
   }
 
 }

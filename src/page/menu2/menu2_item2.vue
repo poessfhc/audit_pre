@@ -13,7 +13,7 @@
           <el-table-column label="工程实施用户" prop="username" width="150"></el-table-column>
           <el-table-column label="工程描述" prop="description" width="200"></el-table-column>
           <el-table-column label="工程阶段" prop="stage" width="200"></el-table-column>
-          <el-table-column align="right">
+          <el-table-column align="center">
             <template slot="header" slot-scope="scope">
               <el-select
                 class="select_list"
@@ -31,15 +31,16 @@
               </el-select>
             </template>
             <template slot-scope="scope">
-              <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">审核</el-button>
-              <el-button
-                size="mini"
-                type="danger"
-                @click="handleDelete(scope.$index, scope.row)"
-              >Delete</el-button>
+              <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">审核记录</el-button>
             </template>
           </el-table-column>
         </el-table>
+        <auditDialog
+          :auditDialogVisible="auditDialogVisible"
+          :auditDialogInfo="auditDialogInfo"
+          :projectId="projectId"
+          @update:auditDialogVisible="auditDialogVisibles"
+        ></auditDialog>
         <el-pagination
           class="pagination"
           @size-change="handleSizeChange"
@@ -56,13 +57,21 @@
 </template>
 <script>
 import { Business } from "@/api/api.js";
+import auditDialog from "@/components/dialog/auditInfoDialog";
 export default {
+  inject: ["reload"],
+  components: {
+    auditDialog
+  },
   data() {
     return {
       total: 0,
       currentPage: 1, //初始页
       pagesize: 10, //    每页的数据
       projectList: [],
+      auditDialogVisible: false,
+      auditDialogInfo: {},
+      projectId: "",
       stageList: [
         { value: "", label: "" },
         { value: "1", label: "立项" },
@@ -146,29 +155,14 @@ export default {
       });
     },
     handleEdit(index, row) {
-      if (row.stage == "立项") {
-        this.$prompt("请输入邮箱", "立项", {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
-          inputErrorMessage: "邮箱格式不正确"
-        })
-          .then(({ value }) => {
-            this.$message({
-              type: "success",
-              message: "你的邮箱是: " + value
-            });
-          })
-          .catch(() => {
-            this.$message({
-              type: "info",
-              message: "取消输入"
-            });
-          });
-      }
+      this.projectId = row.id
+      this.auditDialogVisible = true;
     },
     handleDelete(index, row) {
       console.log(index, row);
+    },
+    auditDialogVisibles(v) {
+      this.auditDialogVisible = v;
     }
   }
 };

@@ -38,7 +38,6 @@ export default {
         createBy: this.user,
         updateBy: this.user
       }).then(res => {
-        debugger
         if(res.status == 200){
           alert("success")
         }
