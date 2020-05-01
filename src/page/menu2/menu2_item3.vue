@@ -50,6 +50,12 @@
           :dialogInfo="dialogInfo"
           @update:dialogVisible="dialogVisibles"
         ></component-dialog>
+        <projectBudgetAuditDialog
+          :budgetDialogVisible="budgetDialogVisible"
+          :budgetDialogInfo="budgetDialogInfo"
+          :projectId = "projectId"
+          @update:budgetDialogVisible="budgetDialogVisibles"
+        ></projectBudgetAuditDialog>
 
         <el-pagination
           class="pagination"
@@ -68,16 +74,21 @@
 <script>
 import { Business } from "@/api/api.js";
 import componentDialog from "@/components/dialog/projectAuditDialog";
+import projectBudgetAuditDialog from "@/components/dialog/projectBudgetAuditDialog";
 export default {
-  inject:['reload'],
+  inject: ["reload"],
   components: {
-    componentDialog
+    componentDialog,
+    projectBudgetAuditDialog
   },
   data() {
     return {
+      projectId: "",
       //控制弹窗 显示
       dialogVisible: false, //点击查看按钮  这条数据详细信息
+      budgetDialogVisible: false,
       dialogInfo: {},
+      budgetDialogInfo: {},
       total: 0,
       currentPage: 1, //初始页
       pagesize: 10, //    每页的数据
@@ -207,10 +218,17 @@ export default {
         });
         this.dialogVisible = true;
       }
+      if (row.stage == "预算待审核") {
+        this.projectId = row.id
+        this.budgetDialogVisible = true;
+      }
     },
     dialogVisibles(v) {
       this.dialogVisible = v;
       console.log(v);
+    },
+    budgetDialogVisibles(v) {
+      this.budgetDialogVisible = v;
     },
     handleDelete(index, row) {
       console.log(index, row);

@@ -43,6 +43,9 @@ export const Business = {
   },
   insertInstallation(data){
     return fetch("post", "/project/insertInstallation", data)
+  },
+  queryInstallationCountById(data){
+    return fetch("get", "/project/queryInstallationCountById", data)
   }
 
 }

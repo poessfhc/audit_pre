@@ -2,19 +2,19 @@
   <el-dialog title="详细信息" :visible.sync="dialogVisible" :before-close="cancelDialog">
     <el-form class="form">
       <el-form-item label="工程名 : ">
-        <p>{{dialogInfo.projectName}}</p>
+        {{dialogInfo.projectName}}
       </el-form-item>
       <el-form-item label="阶段 : ">
-        <p>{{dialogInfo.stage}}</p>
+        {{dialogInfo.stage}}
       </el-form-item>
       <el-form-item label="工程描述 : ">
-        <p>{{dialogInfo.description}}</p>
+        {{dialogInfo.description}}
       </el-form-item>
       <el-form-item label="申请人 : ">
-        <p>{{dialogInfo.createBy}}</p>
+        {{dialogInfo.createBy}}
       </el-form-item>
       <el-form-item label="申请时间 : ">
-        <p>{{dialogInfo.createTime}}</p>
+        {{dialogInfo.createTime}}
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
