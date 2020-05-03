@@ -13,7 +13,7 @@
           <el-table-column label="工程实施用户" prop="username" width="150"></el-table-column>
           <el-table-column label="工程描述" prop="description" width="200"></el-table-column>
           <el-table-column label="工程阶段" prop="stage" width="200"></el-table-column>
-          <el-table-column align="center">
+          <el-table-column align="left">
             <template slot="header" slot-scope="scope">
               <el-select
                 class="select_list"

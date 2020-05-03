@@ -12,14 +12,9 @@
           <el-table-column label="创建人" prop="createBy" width="120"></el-table-column>
           <el-table-column label="工程实施用户" prop="username" width="150"></el-table-column>
           <el-table-column label="工程阶段" prop="stage" width="200"></el-table-column>
-          <el-table-column align="right">
+          <el-table-column align="left">
             <template slot-scope="scope">
               <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">预算</el-button>
-              <el-button
-                size="mini"
-                type="danger"
-                @click="handleDelete(scope.$index, scope.row)"
-              >Delete</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -152,9 +147,6 @@ export default {
     dialogVisibles(v) {
       this.dialogVisible = v;
       console.log(v);
-    },
-    handleDelete(index, row) {
-      console.log(index, row);
     }
   }
 };

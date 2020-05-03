@@ -9,7 +9,17 @@
           <el-table-column label="电话号码" prop="phonenumber" width="120"></el-table-column>
           <el-table-column label="性别" prop="sex" width="150"></el-table-column>
           <el-table-column label="创建时间" prop="createTime" width="200"></el-table-column>
+          <el-table-column align="center">
+            <template slot="header" slot-scope="scope">
+              <el-button type="primary" round @click="register">注 册</el-button>
+            </template>
+          </el-table-column>
         </el-table>
+        <registerDialog
+          :registerDialogVisible="registerDialogVisible"
+          :registerDialogInfo="registerDialogInfo"
+          @update:registerDialogVisible="registerDialogVisibles"
+        ></registerDialog>
         <el-pagination
           class="pagination"
           @size-change="handleSizeChange"
@@ -26,13 +36,19 @@
 </template>
 <script>
 import { User } from "@/api/api.js";
+import registerDialog from "@/components/dialog/registerDialog";
 export default {
+  components: {
+    registerDialog
+  },
   data() {
     return {
       total: 0,
       currentPage: 1, //初始页
       pagesize: 10, //    每页的数据
-      userList: []
+      userList: [],
+      registerDialogVisible: false,
+      registerDialogInfo: {}
     };
   },
   created() {
@@ -76,6 +92,12 @@ export default {
         this.total = res.data.pageResult.totalSize;
         this.userList = res.data.pageResult.content;
       });
+    },
+    registerDialogVisibles(v) {
+      this.registerDialogVisible = v;
+    },
+    register() {
+      this.registerDialogVisible = true;
     }
   }
 };
