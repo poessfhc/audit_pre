@@ -144,7 +144,6 @@ export default {
   methods: {
     onSubmit() {
       User.register(this.userForm).then(res => {
-        debugger;
         if (res.status == 200) {
           this.$message({
             message: "注册成功",

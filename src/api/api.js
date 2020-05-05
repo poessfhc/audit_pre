@@ -55,6 +55,9 @@ export const Business = {
   },
   queryProjectAuditByProjectId(data) {
     return fetch("get", "/project/queryProjectAuditByProjectId", data)
+  },
+  insertProjectCapital(data){
+    return fetch("post", "/project/insertProjectCapital", data)
   }
 
 }

@@ -12,8 +12,17 @@
       <el-table-column prop="installationNum" label="面积(平方米)"></el-table-column>
       <el-table-column prop="total" label="总计(元)"></el-table-column>
     </el-table>
-    <el-form>
-      <el-form-item label="合计(元) : ">{{appropriationDialogInfo.totalPrice}}</el-form-item>
+    <el-form :inline="true">
+      <el-form-item label="合计(元) : " style="width:40%">{{appropriationDialogInfo.totalPrice}}</el-form-item>
+      <el-input
+        placeholder="请输入拨付金额"
+        size="medium"
+        style="width:20%"
+        v-model="input"
+        clearable
+        maxlength="8"
+        oninput="value=value.replace(/[^\d.]/g,'')"
+      ></el-input>
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="cancelDialog">取 消</el-button>
@@ -56,6 +65,7 @@ export default {
   name: "projectAuditDialog",
   data() {
     return {
+      input: "",
       projectId: "",
       appropriationDialogInfo: "",
       installations: []
@@ -80,11 +90,30 @@ export default {
     },
     //修改父组件传过来的值
     success() {
-
+      const capitalInfo = {
+        budget: this.appropriationDialogInfo.totalPrice,
+        actual: this.input,
+        projectId: this.projectId
+      };
+      if (this.input == "") {
+        this.$message.error("请填写拨付金额");
+      } else {
+        Business.insertProjectCapital(capitalInfo).then(res => {
+          if (res.status == 200) {
+            this.$message({
+              message: "成功",
+              type: "success"
+            });
+            this.$emit("update:appropriationDialogVisible", false);
+            this.$parent.reload();
+          }
+        });
+      }
     },
     cancelDialog() {
       this.appropriationDialogInfo = {};
       this.installations = [];
+      this.input = "";
       this.$emit("update:appropriationDialogVisible", false);
     }
   }

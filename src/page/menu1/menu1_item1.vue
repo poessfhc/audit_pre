@@ -38,6 +38,7 @@
 import { User } from "@/api/api.js";
 import registerDialog from "@/components/dialog/registerDialog";
 export default {
+  inject: ["reload"],
   components: {
     registerDialog
   },
