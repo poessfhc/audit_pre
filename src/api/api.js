@@ -16,6 +16,12 @@ export const Login = {
 export const User = {
   queryUserList(data) {
     return fetch("get", "/admin/queryUser", data)
+  },
+  sendCodeEmail(data){
+    return fetch("get", "/admin/sendCodeEmail", data)
+  },
+  register(data){
+    return fetch("post", "/admin/register", data)
   }
 }
 
