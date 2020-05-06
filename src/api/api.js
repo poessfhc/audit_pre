@@ -58,8 +58,17 @@ export const Business = {
   },
   insertProjectCapital(data){
     return fetch("post", "/project/insertProjectCapital", data)
+  },
+  queryProjectCapitalByProjectId(data){
+    return fetch("get", "/project/queryProjectCapitalByProjectId", data)
+  },
+  queryInstallationByProjectId(data){
+    return fetch("get", "/implement/queryInstallationByProjectId", data)
+  },
+  updateInstallationFlagByProjectId(data){
+    return fetch("get", "/implement/updateInstallationFlagByProjectId", data)
   }
-
+ 
 }
 
 export const Log = {
@@ -67,3 +76,70 @@ export const Log = {
     return fetch("get", "/log/querySysLog", data)
   }
 }
+// export const Login = {
+//   userLogin(data) {
+//     return fetch('post', 'api/user/login', data)
+//   },
+//   jcnb(data) {
+//     // return fetch('get','/admin/sendCodeEmail','emailAddress='+data)
+//     return fetch('get', 'api/admin/sendCodeEmail', { 'emailAddress': data })
+//   },
+//   queryMenuList(data) {
+//     return fetch("get", "api/admin/queryControlTypeList", {})
+//   }
+// }
+
+// export const User = {
+//   queryUserList(data) {
+//     return fetch("get", "api/admin/queryUser", data)
+//   },
+//   sendCodeEmail(data){
+//     return fetch("get", "api/admin/sendCodeEmail", data)
+//   },
+//   register(data){
+//     return fetch("post", "api/admin/register", data)
+//   }
+// }
+
+// export const Business = {
+//   insertProject(data) {
+//     return fetch("post", "api/implement/insertProject", data)
+//   },
+
+//   projectList(data) {
+//     return fetch("get", "api/implement/queryProjectListByStatus", data)
+//   },
+
+//   auditProjectList(data) {
+//     return fetch("get", "api/implement/queryAuditProjectListByStatus", data)
+//   },
+
+//   queryProjectById(data) {
+//     return fetch("get", "api/implement/queryProjectById", data)
+//   },
+//   changeProjectStageById(data) {
+//     return fetch("get", "api/implement/changeProjectStageById", data)
+//   },
+//   queryInstallationList(data) {
+//     return fetch("get", "api/project/queryInstallationList", data)
+//   },
+//   insertInstallation(data) {
+//     return fetch("post", "api/project/insertInstallation", data)
+//   },
+//   queryInstallationCountById(data) {
+//     return fetch("get", "api/project/queryInstallationCountById", data)
+//   },
+//   queryProjectAuditByProjectId(data) {
+//     return fetch("get", "api/project/queryProjectAuditByProjectId", data)
+//   },
+//   insertProjectCapital(data){
+//     return fetch("post", "api/project/insertProjectCapital", data)
+//   }
+
+// }
+
+// export const Log = {
+//   queryLogList(data) {
+//     return fetch("get", "api/log/querySysLog", data)
+//   }
+// }

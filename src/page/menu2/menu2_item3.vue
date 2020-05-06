@@ -48,9 +48,15 @@
         <projectBudgetAuditDialog
           :budgetDialogVisible="budgetDialogVisible"
           :budgetDialogInfo="budgetDialogInfo"
-          :projectId = "projectId"
+          :projectId="projectId"
           @update:budgetDialogVisible="budgetDialogVisibles"
         ></projectBudgetAuditDialog>
+        <appropriationAuditDialog
+          :appropriationAuditDialogVisible="appropriationAuditDialogVisible"
+          :appropriationAuditDialogInfo="appropriationAuditDialogInfo"
+          :projectId="projectId"
+          @update:appropriationAuditDialogVisible="appropriationAuditDialogVisibles"
+        ></appropriationAuditDialog>
 
         <el-pagination
           class="pagination"
@@ -70,11 +76,13 @@
 import { Business } from "@/api/api.js";
 import componentDialog from "@/components/dialog/projectAuditDialog";
 import projectBudgetAuditDialog from "@/components/dialog/projectBudgetAuditDialog";
+import appropriationAuditDialog from "@/components/dialog/appropriationAuditDialog";
 export default {
   inject: ["reload"],
   components: {
     componentDialog,
-    projectBudgetAuditDialog
+    projectBudgetAuditDialog,
+    appropriationAuditDialog
   },
   data() {
     return {
@@ -82,8 +90,10 @@ export default {
       //控制弹窗 显示
       dialogVisible: false, //点击查看按钮  这条数据详细信息
       budgetDialogVisible: false,
+      appropriationAuditDialogVisible: false,
       dialogInfo: {},
       budgetDialogInfo: {},
+      appropriationAuditDialogInfo: {},
       total: 0,
       currentPage: 1, //初始页
       pagesize: 10, //    每页的数据
@@ -214,8 +224,13 @@ export default {
         this.dialogVisible = true;
       }
       if (row.stage == "预算待审核") {
-        this.projectId = row.id
+        this.projectId = row.id;
         this.budgetDialogVisible = true;
+      }
+      if (row.stage == "拨付待审核") {
+        this.projectId = row.id;
+        this.appropriationAuditDialogInfo = row
+        this.appropriationAuditDialogVisible = true;
       }
     },
     dialogVisibles(v) {
@@ -224,6 +239,9 @@ export default {
     },
     budgetDialogVisibles(v) {
       this.budgetDialogVisible = v;
+    },
+    appropriationAuditDialogVisibles(v) {
+      this.appropriationAuditDialogVisible = v;
     }
   }
 };
