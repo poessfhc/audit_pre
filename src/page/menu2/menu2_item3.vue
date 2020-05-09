@@ -57,7 +57,12 @@
           :projectId="projectId"
           @update:appropriationAuditDialogVisible="appropriationAuditDialogVisibles"
         ></appropriationAuditDialog>
-
+        <implementEndDialog
+          :implementEndDialogVisible="implementEndDialogVisible"
+          :implementEndDialogInfo="implementEndDialogInfo"
+          :projectId="projectId"
+          @update:implementEndDialogVisible="implementEndDialogVisibles"
+        ></implementEndDialog>
         <el-pagination
           class="pagination"
           @size-change="handleSizeChange"
@@ -77,12 +82,14 @@ import { Business } from "@/api/api.js";
 import componentDialog from "@/components/dialog/projectAuditDialog";
 import projectBudgetAuditDialog from "@/components/dialog/projectBudgetAuditDialog";
 import appropriationAuditDialog from "@/components/dialog/appropriationAuditDialog";
+import implementEndDialog from "@/components/dialog/implementEndDialog";
 export default {
   inject: ["reload"],
   components: {
     componentDialog,
     projectBudgetAuditDialog,
-    appropriationAuditDialog
+    appropriationAuditDialog,
+    implementEndDialog
   },
   data() {
     return {
@@ -91,9 +98,11 @@ export default {
       dialogVisible: false, //点击查看按钮  这条数据详细信息
       budgetDialogVisible: false,
       appropriationAuditDialogVisible: false,
+      implementEndDialogVisible: false,
       dialogInfo: {},
       budgetDialogInfo: {},
       appropriationAuditDialogInfo: {},
+      implementEndDialogInfo: {},
       total: 0,
       currentPage: 1, //初始页
       pagesize: 10, //    每页的数据
@@ -103,7 +112,8 @@ export default {
         { value: "2", label: "立项待审核" },
         { value: "4", label: "预算待审核" },
         { value: "6", label: "拨付待审核" },
-        { value: "8", label: "结算待审核" }
+        { value: "8", label: "结算待审核" },
+        { value: "10", label: "实施待审核" }
       ],
       value: ""
     };
@@ -126,7 +136,8 @@ export default {
         "2": "立项待审核",
         "4": "预算待审核",
         "6": "拨付待审核",
-        "8": "结算待审核"
+        "8": "结算待审核",
+        "10": "实施待审核"
       };
       for (var i = 0; i < this.projectList.length; i++) {
         stage = this.projectList[i].stage;
@@ -149,7 +160,8 @@ export default {
           "2": "立项待审核",
           "4": "预算待审核",
           "6": "拨付待审核",
-          "8": "结算待审核"
+          "8": "结算待审核",
+          "10": "实施待审核"
         };
         for (var i = 0; i < this.projectList.length; i++) {
           stage = this.projectList[i].stage;
@@ -172,7 +184,8 @@ export default {
           "2": "立项待审核",
           "4": "预算待审核",
           "6": "拨付待审核",
-          "8": "结算待审核"
+          "8": "结算待审核",
+          "10": "实施待审核"
         };
         for (var i = 0; i < this.projectList.length; i++) {
           stage = this.projectList[i].stage;
@@ -194,7 +207,8 @@ export default {
           "2": "立项待审核",
           "4": "预算待审核",
           "6": "拨付待审核",
-          "8": "结算待审核"
+          "8": "结算待审核",
+          "10": "实施待审核"
         };
         for (var i = 0; i < this.projectList.length; i++) {
           stage = this.projectList[i].stage;
@@ -209,7 +223,8 @@ export default {
           "2": "立项待审核",
           "4": "预算待审核",
           "6": "拨付待审核",
-          "8": "结算待审核"
+          "8": "结算待审核",
+          "10": "实施待审核"
         };
         Business.queryProjectById({ id: row.id }).then(res => {
           this.dialogInfo = {
@@ -229,19 +244,25 @@ export default {
       }
       if (row.stage == "拨付待审核") {
         this.projectId = row.id;
-        this.appropriationAuditDialogInfo = row
+        this.appropriationAuditDialogInfo = row;
         this.appropriationAuditDialogVisible = true;
+      }
+      if (row.stage == "实施待审核") {
+        this.projectId = row.id;
+        this.implementEndDialogVisible = true;
       }
     },
     dialogVisibles(v) {
       this.dialogVisible = v;
-      console.log(v);
     },
     budgetDialogVisibles(v) {
       this.budgetDialogVisible = v;
     },
     appropriationAuditDialogVisibles(v) {
       this.appropriationAuditDialogVisible = v;
+    },
+    implementEndDialogVisibles(v) {
+      this.implementEndDialogVisible = v;
     }
   }
 };

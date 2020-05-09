@@ -17,10 +17,10 @@ export const User = {
   queryUserList(data) {
     return fetch("get", "/admin/queryUser", data)
   },
-  sendCodeEmail(data){
+  sendCodeEmail(data) {
     return fetch("get", "/admin/sendCodeEmail", data)
   },
-  register(data){
+  register(data) {
     return fetch("post", "/admin/register", data)
   }
 }
@@ -44,6 +44,9 @@ export const Business = {
   changeProjectStageById(data) {
     return fetch("get", "/implement/changeProjectStageById", data)
   },
+  downStage(data) {
+    return fetch("get", "/implement/downStage", data)
+  },
   queryInstallationList(data) {
     return fetch("get", "/project/queryInstallationList", data)
   },
@@ -56,19 +59,24 @@ export const Business = {
   queryProjectAuditByProjectId(data) {
     return fetch("get", "/project/queryProjectAuditByProjectId", data)
   },
-  insertProjectCapital(data){
+  insertProjectCapital(data) {
     return fetch("post", "/project/insertProjectCapital", data)
   },
-  queryProjectCapitalByProjectId(data){
+  queryProjectCapitalByProjectId(data) {
     return fetch("get", "/project/queryProjectCapitalByProjectId", data)
   },
-  queryInstallationByProjectId(data){
+  queryInstallationByProjectId(data) {
     return fetch("get", "/implement/queryInstallationByProjectId", data)
   },
-  updateInstallationFlagByProjectId(data){
+  updateInstallationFlagByProjectId(data) {
     return fetch("get", "/implement/updateInstallationFlagByProjectId", data)
+  },
+  queryInstallationInfoByProjectId(data) {
+    return fetch("get", "/implement/queryInstallationInfoByProjectId", data)
+  },
+  settlementByprojectId(data) {
+    return fetch("get", "/project/settlementByprojectId", data)
   }
- 
 }
 
 export const Log = {
@@ -76,6 +84,9 @@ export const Log = {
     return fetch("get", "/log/querySysLog", data)
   }
 }
+
+
+
 // export const Login = {
 //   userLogin(data) {
 //     return fetch('post', 'api/user/login', data)
@@ -134,6 +145,15 @@ export const Log = {
 //   },
 //   insertProjectCapital(data){
 //     return fetch("post", "api/project/insertProjectCapital", data)
+//   },
+//   queryProjectCapitalByProjectId(data){
+//     return fetch("get", "api/project/queryProjectCapitalByProjectId", data)
+//   },
+//   queryInstallationByProjectId(data){
+//     return fetch("get", "api/implement/queryInstallationByProjectId", data)
+//   },
+//   updateInstallationFlagByProjectId(data){
+//     return fetch("get", "api/implement/updateInstallationFlagByProjectId", data)
 //   }
 
 // }

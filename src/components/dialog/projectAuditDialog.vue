@@ -18,7 +18,7 @@
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
-      <el-button @click="cancelDialog">取 消</el-button>
+      <el-button @click="refuse">拒 绝</el-button>
       <el-button type="primary" @click="success">通 过</el-button>
     </div>
   </el-dialog>
@@ -61,6 +61,11 @@ export default {
       Business.changeProjectStageById({id: this.dialogInfo.id})
       this.$emit("update:dialogVisible", false);
       this.$parent.reload()
+    },
+    refuse(){
+      Business.downStage({ id: this.dialogInfo.id });
+      this.$emit("update:dialogVisible", false);
+      this.$parent.reload();
     },
     cancelDialog(){
       this.$emit("update:dialogVisible", false);
