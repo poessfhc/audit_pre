@@ -86,7 +86,6 @@ export const Log = {
 }
 
 
-
 // export const Login = {
 //   userLogin(data) {
 //     return fetch('post', 'api/user/login', data)
@@ -104,10 +103,10 @@ export const Log = {
 //   queryUserList(data) {
 //     return fetch("get", "api/admin/queryUser", data)
 //   },
-//   sendCodeEmail(data){
+//   sendCodeEmail(data) {
 //     return fetch("get", "api/admin/sendCodeEmail", data)
 //   },
-//   register(data){
+//   register(data) {
 //     return fetch("post", "api/admin/register", data)
 //   }
 // }
@@ -131,6 +130,9 @@ export const Log = {
 //   changeProjectStageById(data) {
 //     return fetch("get", "api/implement/changeProjectStageById", data)
 //   },
+//   downStage(data) {
+//     return fetch("get", "api/implement/downStage", data)
+//   },
 //   queryInstallationList(data) {
 //     return fetch("get", "api/project/queryInstallationList", data)
 //   },
@@ -143,19 +145,24 @@ export const Log = {
 //   queryProjectAuditByProjectId(data) {
 //     return fetch("get", "api/project/queryProjectAuditByProjectId", data)
 //   },
-//   insertProjectCapital(data){
+//   insertProjectCapital(data) {
 //     return fetch("post", "api/project/insertProjectCapital", data)
 //   },
-//   queryProjectCapitalByProjectId(data){
+//   queryProjectCapitalByProjectId(data) {
 //     return fetch("get", "api/project/queryProjectCapitalByProjectId", data)
 //   },
-//   queryInstallationByProjectId(data){
+//   queryInstallationByProjectId(data) {
 //     return fetch("get", "api/implement/queryInstallationByProjectId", data)
 //   },
-//   updateInstallationFlagByProjectId(data){
+//   updateInstallationFlagByProjectId(data) {
 //     return fetch("get", "api/implement/updateInstallationFlagByProjectId", data)
+//   },
+//   queryInstallationInfoByProjectId(data) {
+//     return fetch("get", "api/implement/queryInstallationInfoByProjectId", data)
+//   },
+//   settlementByprojectId(data) {
+//     return fetch("get", "api/project/settlementByprojectId", data)
 //   }
-
 // }
 
 // export const Log = {
