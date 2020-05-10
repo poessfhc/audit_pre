@@ -22,6 +22,18 @@ export const User = {
   },
   register(data) {
     return fetch("post", "/admin/register", data)
+  },
+  queryTree(data) {
+    return fetch("get", "/role/queryTree", {})
+  },
+  queryRoleList(data) {
+    return fetch("get", "/role/queryRoleList", {})
+  },
+  queryRoleTree(data) {
+    return fetch("get", "/role/queryRoleTree", data)
+  },
+  updateRoleTreeByRoleId(data){
+    return fetch("post", "/role/updateRoleTreeByRoleId", data)
   }
 }
 
