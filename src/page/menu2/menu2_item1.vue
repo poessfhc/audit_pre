@@ -25,7 +25,7 @@ export default {
         name: "",
         desc: ""
       },
-      user:""
+      user: ""
     };
   },
   methods: {
@@ -38,11 +38,16 @@ export default {
         createBy: this.user,
         updateBy: this.user
       }).then(res => {
-        if(res.status == 200){
-          alert("success")
+        if (res.status == 200) {
+          this.$message({
+            message: "发布成功",
+            type: "success"
+          });
+          this.form = { name: "", desc: "" };
+        } else {
+          this.$message.error("发布失败,请联系管理员");
         }
-        alert("error")
-      })
+      });
     }
   }
 };

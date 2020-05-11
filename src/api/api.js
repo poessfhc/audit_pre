@@ -29,10 +29,19 @@ export const User = {
   queryRoleList(data) {
     return fetch("get", "/role/queryRoleList", {})
   },
+  queryRoleByUserId(data) {
+    return fetch("get", "/role/queryRoleByUserId", data)
+  },
+  queryRole(data) {
+    return fetch("get", "/role/queryRole", {})
+  },
+  updateUserRoleByUserId(data) {
+    return fetch("get", "/role/updateUserRoleByUserId", data)
+  },
   queryRoleTree(data) {
     return fetch("get", "/role/queryRoleTree", data)
   },
-  updateRoleTreeByRoleId(data){
+  updateRoleTreeByRoleId(data) {
     return fetch("post", "/role/updateRoleTreeByRoleId", data)
   }
 }

@@ -29,7 +29,7 @@
           :page-size="pagesize"
           layout="total, sizes, prev, pager, next, jumper"
           :total="total"
-        >//这是显示总共有多少数据，</el-pagination>
+        ></el-pagination>
       </div>
     </div>
   </div>
