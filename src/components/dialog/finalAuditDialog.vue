@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     title="详细信息"
-    :visible.sync="settlementDialogVisible"
+    :visible.sync="finalAuditDialogVisible"
     :before-close="cancelDialog"
     custom-class="customWidth"
     @open="open"
@@ -20,12 +20,12 @@
         </el-form-item>
         <el-form-item label="实际金额">
           <el-col :span="16">
-            <el-input v-model="form.finalAmount"></el-input>
+            <el-input v-model="form.finalAmount" disabled></el-input>
           </el-col>
         </el-form-item>
       </el-form>
-      <el-button @click="cancelDialog">取 消</el-button>
-      <el-button type="primary" @click="success">拨 付</el-button>
+      <el-button @click="refuse">拒绝</el-button>
+      <el-button type="primary" @click="success">通 过</el-button>
     </div>
   </el-dialog>
 </template>
@@ -35,33 +35,28 @@ import { Business } from "@/api/api.js";
 export default {
   //父组件 传 过来的 值
   props: {
-    settlementDialogVisible: {
+    finalAuditDialogVisible: {
       type: Boolean,
       default: false
     },
-    settlementDialogInfo: {
+    finalAuditDialogInfo: {
       type: Object,
       default: {}
-    },
-    projectId: {
-      type: Object,
-      default: ""
     }
   },
   watch: {
     //监听 弹窗显示， 可以用来写 请求接口
-    settlementDialogVisible: function(newVal, oldVal) {
+    finalAuditDialogVisible: function(newVal, oldVal) {
       if (newVal) {
         console.log(newVal);
       }
     }
   },
   components: {},
-  name: "settlementDialog",
+  name: "finalAuditDialog",
   data() {
     return {
-      settlementDialogInfo: "",
-      projectId: "",
+      finalAuditDialogInfo: "",
       form: {
         budget: "",
         actural: "",
@@ -74,28 +69,30 @@ export default {
   methods: {
     //修改父组件传过来的值
     success() {
-      Business.settlementByprojectId({
-        projectId: this.settlementDialogInfo.id,
-        finalAmount: this.form.finalAmount
-      }).then(res => {
-        if (res.status == 200) {
-          Business.changeProjectStageById({ id: this.settlementDialogInfo.id });
-        } else {
-          alert("error");
-        }
-      });
-      this.$emit("update:settlementDialogVisible", false);
+      Business.changeProjectStageById({ id: this.finalAuditDialogInfo.id });
+      this.$emit("update:finalAuditDialogVisible", false);
+      this.form.budget = "";
+      this.form.actural = "";
+      this.form.finalAmount = "";
       this.$parent.reload();
     },
     cancelDialog() {
-      this.$emit("update:settlementDialogVisible", false);
+      this.$emit("update:finalAuditDialogVisible", false);
       this.form.budget = "";
       this.form.actural = "";
       this.form.finalAmount = "";
     },
+    refuse() {
+      Business.downStage({ id: this.finalAuditDialogInfo.id });
+      this.$emit("update:finalAuditDialogVisible", false);
+      this.form.budget = "";
+      this.form.actural = "";
+      this.form.finalAmount = "";
+      this.$parent.reload();
+    },
     open() {
       Business.queryProjectCapitalByProjectId({
-        id: this.settlementDialogInfo.id
+        id: this.finalAuditDialogInfo.id
       }).then(res => {
         this.form.budget = res.data.projectCapitalDto.budget;
         this.form.actural = res.data.projectCapitalDto.actual;

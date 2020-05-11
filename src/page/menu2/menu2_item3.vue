@@ -63,6 +63,11 @@
           :projectId="projectId"
           @update:implementEndDialogVisible="implementEndDialogVisibles"
         ></implementEndDialog>
+        <finalAuditDialog
+          :finalAuditDialogVisible="finalAuditDialogVisible"
+          :finalAuditDialogInfo="finalAuditDialogInfo"
+          @update:finalAuditDialogVisible="finalAuditDialogVisibles"
+        ></finalAuditDialog>
         <el-pagination
           class="pagination"
           @size-change="handleSizeChange"
@@ -83,13 +88,15 @@ import componentDialog from "@/components/dialog/projectAuditDialog";
 import projectBudgetAuditDialog from "@/components/dialog/projectBudgetAuditDialog";
 import appropriationAuditDialog from "@/components/dialog/appropriationAuditDialog";
 import implementEndDialog from "@/components/dialog/implementEndDialog";
+import finalAuditDialog from "@/components/dialog/finalAuditDialog";
 export default {
   inject: ["reload"],
   components: {
     componentDialog,
     projectBudgetAuditDialog,
     appropriationAuditDialog,
-    implementEndDialog
+    implementEndDialog,
+    finalAuditDialog
   },
   data() {
     return {
@@ -99,10 +106,12 @@ export default {
       budgetDialogVisible: false,
       appropriationAuditDialogVisible: false,
       implementEndDialogVisible: false,
+      finalAuditDialogVisible: false,
       dialogInfo: {},
       budgetDialogInfo: {},
       appropriationAuditDialogInfo: {},
       implementEndDialogInfo: {},
+      finalAuditDialogInfo: {},
       total: 0,
       currentPage: 1, //初始页
       pagesize: 10, //    每页的数据
@@ -251,6 +260,10 @@ export default {
         this.projectId = row.id;
         this.implementEndDialogVisible = true;
       }
+      if (row.stage == "结算待审核") {
+        this.finalAuditDialogInfo = row;
+        this.finalAuditDialogVisible = true;
+      }
     },
     dialogVisibles(v) {
       this.dialogVisible = v;
@@ -263,6 +276,9 @@ export default {
     },
     implementEndDialogVisibles(v) {
       this.implementEndDialogVisible = v;
+    },
+    finalAuditDialogVisibles(v) {
+      this.finalAuditDialogVisible = v;
     }
   }
 };

@@ -83,7 +83,8 @@ export default {
         { value: "7", label: "结算" },
         { value: "8", label: "结算审核中" },
         { value: "9", label: "实施中" },
-        { value: "10", label: "实施结束" }
+        { value: "10", label: "实施审核中" },
+        { value: "11", label: "工程结束" }
       ],
       value: ""
     };
@@ -155,7 +156,7 @@ export default {
       });
     },
     handleEdit(index, row) {
-      this.projectId = row.id
+      this.projectId = row.id;
       this.auditDialogVisible = true;
     },
     handleDelete(index, row) {
