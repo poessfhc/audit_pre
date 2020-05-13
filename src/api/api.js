@@ -107,6 +107,10 @@ export const Log = {
 }
 
 
+
+
+
+
 // export const Login = {
 //   userLogin(data) {
 //     return fetch('post', 'api/user/login', data)
@@ -129,6 +133,27 @@ export const Log = {
 //   },
 //   register(data) {
 //     return fetch("post", "api/admin/register", data)
+//   },
+//   queryTree(data) {
+//     return fetch("get", "api/role/queryTree", {})
+//   },
+//   queryRoleList(data) {
+//     return fetch("get", "api/role/queryRoleList", {})
+//   },
+//   queryRoleByUserId(data) {
+//     return fetch("get", "api/role/queryRoleByUserId", data)
+//   },
+//   queryRole(data) {
+//     return fetch("get", "api/role/queryRole", {})
+//   },
+//   updateUserRoleByUserId(data) {
+//     return fetch("get", "api/role/updateUserRoleByUserId", data)
+//   },
+//   queryRoleTree(data) {
+//     return fetch("get", "api/role/queryRoleTree", data)
+//   },
+//   updateRoleTreeByRoleId(data) {
+//     return fetch("post", "api/role/updateRoleTreeByRoleId", data)
 //   }
 // }
 

@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "echarts": "^4.7.0",
     "el-table-infinite-scroll": "^1.0.10",
     "element-ui": "^2.13.0",
     "vue": "^2.6.11",
