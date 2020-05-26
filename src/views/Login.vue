@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <el-container>
-      <el-header>工程跟踪审计管理系统</el-header>
+      <el-header align="center">工程跟踪审计管理系统</el-header>
       <el-main class="login_form">
         <el-form :model="formLoginIn" ref="formLoginIn" label-width="100px" class="demo-ruleForm">
           <el-form-item label="用户名" prop="username">

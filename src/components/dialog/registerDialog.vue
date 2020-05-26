@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="详细信息" :visible.sync="registerDialogVisible" :before-close="cancelDialog">
+  <el-dialog title="注册界面" :visible.sync="registerDialogVisible" :before-close="cancelDialog">
     <el-form
       :model="userForm"
       :rules="rules"
@@ -143,20 +143,31 @@ export default {
   mounted() {},
   methods: {
     onSubmit() {
-      User.register(this.userForm).then(res => {
-        if (res.status == 200) {
-          this.$message({
-            message: "注册成功",
-            type: "success"
-          });
-          this.$emit("update:registerDialogVisible", false);
-          this.userForm = {};
-        } else if (res.status == 0) {
-          this.$message.error("验证码错误");
-        } else {
-          this.$message.error("注册失败");
-        }
-      });
+      if (
+        this.userForm.username != "" &&
+        this.userForm.password != "" &&
+        this.userForm.sex != "" &&
+        this.userForm.phonenumber != "" &&
+        this.userForm.email != "" &&
+        this.userForm.code != ""
+      ) {
+        User.register(this.userForm).then(res => {
+          if (res.status == 200) {
+            this.$message({
+              message: "注册成功",
+              type: "success"
+            });
+            this.$emit("update:registerDialogVisible", false);
+            this.userForm = {};
+          } else if (res.status == 0) {
+            this.$message.error("验证码错误");
+          } else {
+            this.$message.error("注册失败");
+          }
+        });
+      }else{
+        this.$message.error("请填写表单");
+      }
     },
     getVerifyCode() {
       console.log(this.userForm);

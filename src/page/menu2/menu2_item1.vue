@@ -19,6 +19,7 @@
 <script>
 import { Business } from "@/api/api.js";
 export default {
+  inject: ["reload"],
   data() {
     return {
       form: {
@@ -31,23 +32,27 @@ export default {
   methods: {
     onSubmit() {
       this.user = sessionStorage.getItem("user");
-      Business.insertProject({
-        projectName: this.form.name,
-        description: this.form.desc,
-        userId: this.user,
-        createBy: this.user,
-        updateBy: this.user
-      }).then(res => {
-        if (res.status == 200) {
-          this.$message({
-            message: "发布成功",
-            type: "success"
-          });
-          this.form = { name: "", desc: "" };
-        } else {
-          this.$message.error("发布失败,请联系管理员");
-        }
-      });
+      if (this.form.name != "") {
+        Business.insertProject({
+          projectName: this.form.name,
+          description: this.form.desc,
+          userId: this.user,
+          createBy: this.user,
+          updateBy: this.user
+        }).then(res => {
+          if (res.status == 200) {
+            this.$message({
+              message: "发布成功",
+              type: "success"
+            });
+            this.reload();
+          } else {
+            this.$message.error("发布失败,请联系管理员");
+          }
+        });
+      }else{
+        this.$message.error("工程名称不能为空");
+      }
     }
   }
 };

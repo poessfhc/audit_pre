@@ -10,6 +10,9 @@
         <el-step :title="item.title" :description="item.description" v-for="item in items"></el-step>
       </el-steps>
     </div>
+    <div>
+      <el-button type="danger" round @click="warning">危险按钮</el-button>
+    </div>
   </el-dialog>
 </template>
 
@@ -46,7 +49,7 @@ export default {
       trackDialogInfo: "",
       projectId: "",
       items: [],
-      active: 0,
+      active: 0
     };
   },
   created() {},
@@ -70,6 +73,17 @@ export default {
         this.items = res.data.items;
         this.active = res.data.max;
         if (this.active == this.items.length) {
+        }
+      });
+    },
+    warning() {
+      Business.warning({ id: this.projectId, flag: "1" }).then(res => {
+        if (res.status == 200) {
+          this.$message({
+            showClose: true,
+            message: "警告成功",
+            type: "success"
+          });
         }
       });
     }

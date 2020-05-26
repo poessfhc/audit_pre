@@ -97,6 +97,9 @@ export const Business = {
   },
   settlementByprojectId(data) {
     return fetch("get", "/project/settlementByprojectId", data)
+  },
+  warning(data){
+    return fetch("get","/implement/warning",data)
   }
 }
 

@@ -5,6 +5,7 @@
     :before-close="cancelDialog"
     @open="open"
   >
+    <el-tag type="warning" v-if="waringFlag">请加快进度</el-tag>
     <div class="step">
       <el-steps :active="active" finish-status="success">
         <el-step :title="item.title" :description="item.description" v-for="item in items"></el-step>
@@ -45,6 +46,7 @@ export default {
   name: "projectAuditDialog",
   data() {
     return {
+      waringFlag: false,
       implementDialogInfo: "",
       projectId: "",
       items: [],
@@ -65,6 +67,7 @@ export default {
       this.items = [];
       this.active = 0;
       this.nextName = "下一步";
+      this.waringFlag = false;
       this.$emit("update:implementDialogVisible", false);
     },
     open() {
@@ -73,6 +76,11 @@ export default {
       }).then(res => {
         this.items = res.data.items;
         this.active = res.data.max;
+        if (res.data.flag == "true") {
+          this.waringFlag = true;
+        } else {
+          this.waringFlag = false;
+        }
         if (this.active == this.items.length) {
           this.nextName = "提交";
         }
@@ -121,7 +129,9 @@ export default {
           "description"
         ] = this.$options.methods.dateFormat(new Date());
         Business.updateInstallationFlagByProjectId(data).then(res => {
+          Business.warning({ id: this.projectId, flag: "2" });
           if (res.status == 200) {
+            this.waringFlag = false
             this.$message({
               message: "更新成功",
               type: "success"
